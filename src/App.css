@@ -42,7 +42,7 @@ main {
   flex: 4;
 }
 
-.feature {
+/*.feature {
   padding: 0.8rem;
   padding-top: 0.4rem;
   border: 0;
@@ -58,15 +58,15 @@ main {
   font-weight: bold;
 }
 
-.feature__item + .feature__item {
+/*.feature__item + .feature__item {
   margin-top: 0.8rem;
 }
 
 /* Hide radios from sighted users,
-while keeping them available to the keyboard */
+while keeping them available to the keyboard 
 .feature__option {
   position: absolute !important;
-  clip: rect(1px 1px 1px 1px); /* IE6, IE7 */
+  clip: rect(1px 1px 1px 1px); /* IE6, IE7 
   clip: rect(1px, 1px, 1px, 1px);
   padding: 0 !important;
   border: 0 !important;
@@ -96,14 +96,14 @@ while keeping them available to the keyboard */
 
 .feature__option:not(:checked) + .feature__label {
   cursor: pointer;
-}
+} */
 
 .main__summary {
   flex: 3;
   margin-left: 0.2rem;
 }
 
-.summary__option {
+/*.summary__option {
   display: grid;
   grid-template-areas:
     'key cost'
@@ -125,7 +125,7 @@ while keeping them available to the keyboard */
 .summary__option__cost {
   grid-area: cost;
   text-align: right;
-}
+} */
 
 .summary__total {
   font-size: 2.2rem;

@@ -5,6 +5,10 @@ import React, { Component } from 'react';
 import slugify from 'slugify';
 
 import './App.css';
+import Options from './Options/Options';
+import Features from './Features/Features';
+import SummaryOption from './SummaryOption/SummaryOption'
+//import MainForm from './MainForm/MainForm';
 
 // This object will allow us to
 // easily convert numbers into US dollar values
@@ -35,7 +39,7 @@ class App extends Component {
     }
   };
 
-  updateFeature = (feature, newValue) => {
+ updateFeature = (feature, newValue) => {
     const selected = Object.assign({}, this.state.selected);
     selected[feature] = newValue;
     this.setState({
@@ -49,44 +53,31 @@ class App extends Component {
       const options = this.props.features[feature].map(item => {
         const itemHash = slugify(JSON.stringify(item));
         return (
-          <div key={itemHash} className="feature__item">
-            <input
-              type="radio"
-              id={itemHash}
-              className="feature__option"
-              name={slugify(feature)}
-              checked={item.name === this.state.selected[feature].name}
-              onChange={e => this.updateFeature(feature, item)}
-            />
-            <label htmlFor={itemHash} className="feature__label">
-              {item.name} ({USCurrencyFormat.format(item.cost)})
-            </label>
-          </div>
-        );
-      });
-
-      return (
-        <fieldset className="feature" key={featureHash}>
-          <legend className="feature__name">
-            <h3>{feature}</h3>
-          </legend>
-          {options}
-        </fieldset>
-      );
+      <Options 
+        iH={itemHash} 
+        item={item} 
+        feature={feature} 
+        name={slugify(feature)} 
+        money={USCurrencyFormat}
+        onChange = {e => this.updateFeature( feature,  item)} 
+        checked={item.name === this.state.selected[feature].name}/>);
     });
 
-    const summary = Object.keys(this.state.selected).map((feature, idx) => {
+      return (
+        <Features feature={feature} featureHash={featureHash} options={options} />
+      );
+    }); 
+
+        const summary = Object.keys(this.state.selected).map((feature, idx) => {
       const featureHash = feature + '-' + idx;
       const selectedOption = this.state.selected[feature];
 
       return (
-        <div className="summary__option" key={featureHash}>
-          <div className="summary__option__label">{feature} </div>
-          <div className="summary__option__value">{selectedOption.name}</div>
-          <div className="summary__option__cost">
-            {USCurrencyFormat.format(selectedOption.cost)}
-          </div>
-        </div>
+      <SummaryOption 
+        fH={featureHash} 
+        feature={feature} 
+        selectedOption={selectedOption} 
+        money={USCurrencyFormat} />
       );
     });
 
@@ -120,5 +111,4 @@ class App extends Component {
     );
   }
 }
-
 export default App;
