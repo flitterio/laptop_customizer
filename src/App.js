@@ -8,7 +8,9 @@ import './App.css';
 import Options from './Options/Options';
 import Features from './Features/Features';
 import SummaryOption from './SummaryOption/SummaryOption'
-//import MainForm from './MainForm/MainForm';
+import MainForm from './MainForm/MainForm';
+import MainSummary from './MainSummary/MainSummary';
+
 
 // This object will allow us to
 // easily convert numbers into US dollar values
@@ -68,7 +70,7 @@ class App extends Component {
       );
     }); 
 
-        const summary = Object.keys(this.state.selected).map((feature, idx) => {
+      const summary = Object.keys(this.state.selected).map((feature, idx) => {
       const featureHash = feature + '-' + idx;
       const selectedOption = this.state.selected[feature];
 
@@ -92,20 +94,11 @@ class App extends Component {
           <h1>ELF Computing | Laptops</h1>
         </header>
         <main>
-          <form className="main__form">
-            <h2>Customize your laptop</h2>
-            {features}
-          </form>
-          <section className="main__summary">
-            <h2>Your cart</h2>
-            {summary}
-            <div className="summary__total">
-              <div className="summary__total__label">Total</div>
-              <div className="summary__total__value">
-                {USCurrencyFormat.format(total)}
-              </div>
-            </div>
-          </section>
+          <MainForm features={features} />
+          <MainSummary
+           summary={summary}
+            USCurrencyFormat={USCurrencyFormat} 
+            total={total}/>
         </main>
       </div>
     );
